@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @book = Book.new
+    @user = User.where.not(id: current_user.id)
   end
 
   def edit
@@ -36,5 +37,15 @@ class UsersController < ApplicationController
     unless @user == current_user
       redirect_to user_path(current_user)
     end
+  end
+  
+  def followings
+     user = User.find(params[:id])
+    @user = user.followings
+  end
+  
+  def followers
+    user = User.find(params[:id])
+    @user = user.followers
   end
 end

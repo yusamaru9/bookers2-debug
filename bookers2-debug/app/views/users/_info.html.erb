@@ -27,7 +27,7 @@
     <% end %>
   <% else %>
     <% if user.is_followed_by?(current_user) %>
-      <%= link_to user_relationships_path(user), method: :delete, class: 'btn btn-success' do %>
+      <%= link_to user_relationships_path(user), method: :delete, class: 'btn btn-info' do %>
       フォロー外す
       <% end %>
     <% else %>

@@ -9,7 +9,13 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    to = Time.current.at_end_of_day
+    form = (to - 6.day).at_beginning_of_day
+    @books = Book.includes(:favorited_users).
+      sort {|a,b|
+        b.favorited_users.includes(:favorites).where(created_at: form...to).size <=>
+        a.favorited_users.includes(:favorites).where(created_at: form...to).size
+      } #過去1週間のいいね多い順
     @book = Book.new
   end
 

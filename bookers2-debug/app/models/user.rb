@@ -5,9 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books, dependent: :destroy
-  has_many :favorites, dependent: :destroy #dependent追加
+  has_many :favorites, dependent: :destroy #dependent~追加
   has_many :liked_books, through: :favorites, source: :book
   has_many :book_comments, dependent: :destroy
+  has_many :messages, dependent: :destroy #DM
+  has_many :entries, dependent: :destroy #DM
   
   #フォローする、している側のユーザー
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy

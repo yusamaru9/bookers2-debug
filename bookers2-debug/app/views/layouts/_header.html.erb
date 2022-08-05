@@ -57,7 +57,13 @@
   <div class="container">
     <div class='row'>
       <div class='mx-auto mt-1'>
-        <%= render 'searches/search' %>
+        <% if @range == "Item" %>
+          <h2>Items search for "<%= params[:word] %>"</h2>
+          <% @items.each do |item| %>
+            <%= link_to item_path(item.id), class: "item_#{item.id}" %>
+          <% end %>
+        <% else %>
+      <% end %>
       </div>
     </div>
   </div>
